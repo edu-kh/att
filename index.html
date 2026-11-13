@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;500;700&family=Moul&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<title>សម្រង់អវត្តមាន</title>
+<style>
+  :root{
+    --ink:#132436;
+    --muted:#7c8ba0;
+    --bg:#e7edf5;
+    --surface:#ffffff;
+    --surface-soft:#f3f6fb;
+    --primary:#1b6e82;
+    --primary-dark:#134f5e;
+    --gold:#c79a3b;
+    --present:#2e9e5c;
+    --present-soft:#e4f5eb;
+    --absent:#d9534f;
+    --absent-soft:#fbe7e6;
+    --radius-lg:20px;
+    --radius-md:14px;
+    --radius-sm:10px;
+    --shadow: 0 10px 30px rgba(19,36,54,0.10);
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    font-family:"Battambang", system-ui, sans-serif;
+    background:
+      radial-gradient(1200px 500px at 50% -10%, #dfeaf6 0%, var(--bg) 55%);
+    color:var(--ink);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  .app{
+    max-width:640px;
+    margin:0 auto;
+    height:100dvh;
+    display:flex;
+    flex-direction:column;
+    background:var(--surface);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+    position:relative;
+  }
+
+  /* ---------- Header ---------- */
+  .header{
+    position:relative;
+    padding:18px 18px 14px;
+    background: linear-gradient(155deg, var(--primary-dark), var(--primary) 65%);
+    color:#eaf4f7;
+    overflow:visible;
+    z-index:20;
+    flex-shrink:0;
+  }
+
+  .header::after{
+    content:"";
+    position:absolute;
+    right:-30px;
+    bottom:-30px;
+    width:220px;
+    height:120px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 120'><g fill='%23c79a3b' opacity='0.35'><rect x='20' y='70' width='180' height='8'/><polygon points='40,70 50,40 60,70'/><polygon points='95,70 110,20 125,70'/><polygon points='160,70 170,40 180,70'/></g></svg>") no-repeat center / contain;
+    pointer-events:none;
+  }
+
+  .title-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:8px;
+    margin:0 0 14px;
+    position:relative;
+  }
+
+  .title-row h1{
+    font-family:"Moul", "Battambang", serif;
+    font-weight:400;
+    font-size:1.15rem;
+    letter-spacing:0.3px;
+    margin:0;
+    text-align:center;
+  }
+
+  .title-row .badge{
+    font-size:0.95rem;
+  }
+
+  .row-inline{
+    display:flex;
+    gap:8px;
+    align-items:stretch;
+  }
+
+  .field{
+    position:relative;
+    flex:1;
+    min-width:0;
+  }
+
+  .field i.leading{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+    font-size:0.85rem;
+    pointer-events:none;
+  }
+
+  #dateInput{
+    width:100%;
+    padding:11px 12px 11px 34px;
+    border:none;
+    border-radius:var(--radius-sm);
+    background:rgba(255,255,255,0.94);
+    color:var(--ink);
+    font-family:inherit;
+    font-size:0.92rem;
+    outline:none;
+    transition:box-shadow .18s ease, transform .18s ease;
+  }
+  #dateInput:focus{ box-shadow:0 0 0 3px rgba(199,154,59,0.55); }
+
+  .score-link{
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:0 14px;
+    border-radius:var(--radius-sm);
+    background:rgba(255,255,255,0.14);
+    border:1px solid rgba(255,255,255,0.35);
+    color:#fff;
+    text-decoration:none;
+    font-size:0.85rem;
+    white-space:nowrap;
+    transition:background .18s ease, transform .12s ease;
+  }
+  .score-link:active{ transform:scale(0.96); }
+  .score-link:hover{ background:rgba(255,255,255,0.24); }
+
+  #search{
+    width:100%;
+    padding:11px 12px 11px 34px;
+    border:none;
+    border-radius:var(--radius-sm);
+    background:rgba(255,255,255,0.94);
+    font-family:inherit;
+    font-size:0.92rem;
+    outline:none;
+    transition:box-shadow .18s ease;
+  }
+  #search:focus{ box-shadow:0 0 0 3px rgba(199,154,59,0.55); }
+  #search::placeholder{ color:#7c8ba0; }
+
+  /* ---------- Export Dropdowns ---------- */
+  .dropdown{
+    position:relative;
+    flex-shrink:0;
+    display:flex;
+  }
+
+  .export-btn{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    padding:0 11px;
+    border-radius:var(--radius-sm);
+    background:rgba(255,255,255,0.14);
+    border:1px solid rgba(255,255,255,0.35);
+    color:#fff;
+    font-family:inherit;
+    font-size:0.82rem;
+    font-weight:700;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background .18s ease, transform .12s ease;
+  }
+  .export-btn:hover{ background:rgba(255,255,255,0.24); }
+  .export-btn:active{ transform:scale(0.96); }
+
+  .export-btn.pdf i.icon-type{ color:#ff9b95; }
+  .export-btn.excel i.icon-type{ color:#7fe0a8; }
+
+  .dropdown-menu{
+    position:absolute;
+    top:calc(100% + 6px);
+    right:0;
+    min-width:155px;
+    max-height:260px;
+    overflow-y:auto;
+    background:var(--surface);
+    border-radius:var(--radius-sm);
+    box-shadow:0 12px 28px rgba(19,36,54,0.22);
+    border:1px solid #dfe6ee;
+    padding:4px;
+    display:none;
+    z-index:100;
+  }
+  .dropdown-menu.open{
+    display:block;
+    animation:menuIn .16s ease forwards;
+  }
+  @keyframes menuIn{
+    from{ opacity:0; transform:translateY(-6px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .dropdown-item{
+    width:100%;
+    text-align:left;
+    padding:8px 12px;
+    border:none;
+    background:transparent;
+    color:var(--ink);
+    font-family:inherit;
+    font-size:0.86rem;
+    border-radius:7px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    transition:background .14s ease, color .14s ease;
+  }
+  .dropdown-item:hover{
+    background:var(--surface-soft);
+    color:var(--primary);
+  }
+  .dropdown-item span.en-month{
+    font-size:0.75rem;
+    color:var(--muted);
+  }
+
+  /* progress */
+  .progress-wrap{
+    margin-top:12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .progress-track{
+    flex:1;
+    height:6px;
+    border-radius:99px;
+    background:rgba(255,255,255,0.25);
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    background:var(--gold);
+    border-radius:99px;
+    transition:width .35s cubic-bezier(.4,0,.2,1);
+  }
+  .progress-label{
+    font-size:0.75rem;
+    color:#eaf4f7;
+    opacity:0.9;
+    white-space:nowrap;
+  }
+
+  /* ---------- Content ---------- */
+  .content{
+    flex:1;
+    overflow-y:auto;
+    padding:12px 12px 20px;
+    background:var(--surface-soft);
+  }
+
+  .state-msg{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    padding:60px 20px;
+    color:var(--muted);
+    text-align:center;
+    font-size:0.9rem;
+  }
+
+  .spinner{
+    width:34px; height:34px;
+    border-radius:50%;
+    border:3px solid #d7e2ec;
+    border-top-color:var(--primary);
+    animation:spin 0.8s linear infinite;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .student-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    background:var(--surface);
+    border-radius:var(--radius-md);
+    margin-bottom:8px;
+    box-shadow:0 1px 0 rgba(19,36,54,0.04);
+    opacity:0;
+    transform:translateY(8px);
+    animation:rowIn .35s ease forwards;
+  }
+  @keyframes rowIn{
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .avatar{
+    flex-shrink:0;
+    width:34px; height:34px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(155deg, var(--gold), #b6832a);
+    color:#fff;
+    font-size:0.85rem;
+    font-weight:700;
+  }
+
+  .student-name{
+    flex:1;
+    font-size:0.95rem;
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .status-group{
+    display:flex;
+    gap:6px;
+    flex-shrink:0;
+  }
+
+  .status-btn{
+    width:36px; height:36px;
+    border-radius:50%;
+    border:1.5px solid #dfe6ee;
+    background:#fff;
+    color:#b6bfcb;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem;
+    cursor:pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease, transform .12s ease;
+  }
+  .status-btn:active{ transform:scale(0.9); }
+
+  .status-btn.present.active{
+    background:var(--present);
+    border-color:var(--present);
+    color:#fff;
+    animation:pop .28s ease;
+  }
+  .status-btn.absent.active{
+    background:var(--absent);
+    border-color:var(--absent);
+    color:#fff;
+    animation:pop .28s ease;
+  }
+  .btn-text{ font-size:0.85rem; 
+    font-weight:700; 
+    color:#363535fc; 
+    font-family: times-new-roman;
+}
+  @keyframes pop{
+    0%{ transform:scale(1); }
+    45%{ transform:scale(1.22); }
+    100%{ transform:scale(1); }
+  }
+
+  .student-row[data-status="P"]{ background:var(--present-soft); }
+  .student-row[data-status="A"]{ background:var(--absent-soft); }
+
+  /* ---------- Footer ---------- */
+  .footer{
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:var(--surface);
+    border-top:1px solid #e7edf5;
+  }
+
+  .btn{
+    border:none;
+    cursor:pointer;
+    font-family:inherit;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition: transform .12s ease, box-shadow .12s ease, opacity .15s ease;
+  }
+  .btn:active{ transform:translateY(2px); }
+
+  .btn-reset{
+    width:52px; height:52px;
+    border-radius:50%;
+    background:var(--surface-soft);
+    border:1.5px solid #dfe6ee;
+    color:var(--muted);
+    font-size:1rem;
+  }
+  .btn-reset:hover{ color:var(--ink); }
+
+  .btn-submit{
+    flex:1;
+    max-width:280px;
+    height:52px;
+    border-radius:99px;
+    background:linear-gradient(155deg, var(--primary), var(--primary-dark));
+    color:#fff;
+    font-size:0.98rem;
+    box-shadow:0 8px 18px rgba(19,78,94,0.35);
+  }
+  .btn-submit:disabled{ opacity:0.85; cursor:default; }
+  .btn-submit.success{ background:linear-gradient(155deg, var(--present), #237a47); }
+
+  .btn-submit i.fa-hourglass{ animation:spin 1s linear infinite; }
+
+  /* scrollbar */
+  .content::-webkit-scrollbar{ width:6px; }
+  .content::-webkit-scrollbar-thumb{ background:#c9d5e2; border-radius:99px; }
+
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+
+  /* ---------- Toast ---------- */
+  .toast-layer{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding: 0 16px calc(90px + env(safe-area-inset-bottom));
+    pointer-events:none;
+    z-index:50;
+  }
+
+  .toast{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    max-width:100%;
+    padding:13px 16px;
+    border-radius:var(--radius-md);
+    background:var(--ink);
+    color:#fff;
+    font-size:0.88rem;
+    box-shadow:0 12px 28px rgba(19,36,54,0.28);
+    opacity:0;
+    transform:translateY(14px) scale(0.96);
+    transition: opacity .22s ease, transform .22s ease;
+    pointer-events:auto;
+  }
+  .toast.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+  .toast i{
+    flex-shrink:0;
+    font-size:1rem;
+  }
+  .toast.warn i{ color:var(--gold); }
+  .toast.error i{ color:#ff8a83; }
+  .toast.success i{ color:#7fe0a8; }
+
+  /* ---------- Sending overlay ---------- */
+  .app-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(231,237,245,0.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:40;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s ease;
+  }
+  .app-overlay.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+
+    <div class="header">
+      <div class="title-row">
+        <h1>សម្រង់អវត្តមានថ្នាក់ទី៧D</h1>
+        <span class="badge">👨‍💻</span>
+      </div>
+
+      <div class="row-inline">
+        <div class="field">
+          <i class="fa-regular fa-calendar leading"></i>
+          <input type="date" id="dateInput" />
+        </div>
+        <a class="score-link" href="https://edu-kh.github.io/score/">
+          <i class="fa-solid fa-chart-simple"></i> សម្រង់ពិន្ទុ
+        </a>
+      </div>
+
+      <div class="row-inline" style="margin-top:8px;">
+        <div class="field">
+          <i class="fa-solid fa-magnifying-glass leading"></i>
+          <input type="text" id="search" placeholder="ស្វែងរកឈ្មោះសិស្ស..." oninput="filterStudents()" />
+        </div>
+
+        <div class="dropdown">
+          <button type="button" class="export-btn pdf" onclick="toggleDropdown('pdfMenu', event)" aria-label="នាំចេញ PDF">
+            <i class="fa-solid fa-file-pdf icon-type"></i> PDF <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <div class="dropdown-menu" id="pdfMenu"></div>
+        </div>
+
+        <div class="dropdown">
+          <button type="button" class="export-btn excel" onclick="toggleDropdown('excelMenu', event)" aria-label="នាំចេញ Excel">
+            <i class="fa-solid fa-file-excel icon-type"></i> Excel <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <div class="dropdown-menu" id="excelMenu"></div>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-label" id="progressLabel">0 / 0</div>
+      </div>
+    </div>
+
+    <div id="student-list" class="content"></div>
+
+    <div class="footer">
+      <button id="resetBtn" class="btn btn-reset" onclick="resetForm()" aria-label="កំណត់ឡើងវិញ">
+        <i class="fa-solid fa-arrows-rotate"></i>
+      </button>
+      <button id="submitBtn" class="btn btn-submit" onclick="submitForm()">
+        <i class="fa-regular fa-paper-plane"></i> ដាក់ស្នើ
+      </button>
+    </div>
+
+    <div class="toast-layer" id="toastLayer"></div>
+
+    <div class="app-overlay" id="appOverlay"></div>
+  </div>
+
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec';
+  let students = [];
+  let filteredStudents = [];
+
+  const SCHOOL_MONTHS = [
+    { en: 'October', km: 'តុលា' },
+    { en: 'November', km: 'វិច្ឆិកា' },
+    { en: 'December', km: 'ធ្នូ' },
+    { en: 'January', km: 'មករា' },
+    { en: 'February', km: 'កុម្ភៈ' },
+    { en: 'March', km: 'មីនា' },
+    { en: 'April', km: 'មេសា' },
+    { en: 'May', km: 'ឧសភា' },
+    { en: 'June', km: 'មិថុនា' },
+    { en: 'July', km: 'កក្កដា' }
+  ];
+
+  function initDropdowns() {
+    const pdfMenu = document.getElementById('pdfMenu');
+    const excelMenu = document.getElementById('excelMenu');
+
+    SCHOOL_MONTHS.forEach(m => {
+      const pdfItem = document.createElement('button');
+      pdfItem.type = 'button';
+      pdfItem.className = 'dropdown-item';
+      pdfItem.innerHTML = `<span>ខែ${m.km}</span><span class="en-month">${m.en}</span>`;
+      pdfItem.onclick = () => handleExport('pdf', m);
+      pdfMenu.appendChild(pdfItem);
+
+      const excelItem = document.createElement('button');
+      excelItem.type = 'button';
+      excelItem.className = 'dropdown-item';
+      excelItem.innerHTML = `<span>ខែ${m.km}</span><span class="en-month">${m.en}</span>`;
+      excelItem.onclick = () => handleExport('excel', m);
+      excelMenu.appendChild(excelItem);
+    });
+  }
+
+  function toggleDropdown(menuId, event) {
+    event.stopPropagation();
+    const targetMenu = document.getElementById(menuId);
+    const isOpen = targetMenu.classList.contains('open');
+
+    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('open'));
+    if (!isOpen) {
+      targetMenu.classList.add('open');
+    }
+  }
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('open'));
+  });
+
+  function handleExport(type, monthObj) {
+    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('open'));
+    const label = type === 'pdf' ? 'PDF' : 'Excel';
+    showToast(`កំពុងរៀបចំទាញយក ${label} ខែ${monthObj.km}...`, 'success');
+
+    // ប្រើ monthObj.km ដើម្បីទាញពី Sheet ឈ្មោះខែខ្មែរ (ឧទាហរណ៍: មករា, កុម្ភៈ...)
+    const khmerSheetName = encodeURIComponent(monthObj.km);
+    const exportURL = `${scriptURL}?action=export&format=${type}&month=${khmerSheetName}`;
+    
+    window.open(exportURL, '_blank');
+  }
+  function getMonthFromDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleString('en-US', { month: 'long' });
+  }
+
+  function initials(name) {
+    const trimmed = (name || '').trim();
+    return trimmed ? trimmed.charAt(0).toUpperCase() : '?';
+  }
+
+  async function loadStudents(date) {
+    const month = getMonthFromDate(date);
+    const container = document.getElementById('student-list');
+
+    container.innerHTML = `
+      <div class="state-msg">
+        <div class="spinner"></div>
+        កំពុងទាញឈ្មោះសិស្ស សូមរង់ចាំ...
+      </div>
+    `;
+
+    try {
+      const res = await fetch(`${scriptURL}?month=${month}`);
+      students = (await res.json()).map(s => ({ ...s, status: '' }));
+      filteredStudents = [...students];
+      renderStudents();
+    } catch (e) {
+      container.innerHTML = `
+        <div class="state-msg">
+          <i class="fa-solid fa-circle-exclamation" style="font-size:1.6rem;color:var(--absent);"></i>
+          មិនអាចទាញសិស្សបានទេ
+        </div>
+      `;
+    }
+  }
+
+  function updateProgress() {
+    const total = filteredStudents.length;
+    const marked = filteredStudents.filter(s => s.status).length;
+    const pct = total ? Math.round((marked / total) * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = `${marked} / ${total}`;
+  }
+
+  function renderStudents() {
+    const container = document.getElementById('student-list');
+    container.innerHTML = '';
+
+    if (filteredStudents.length === 0) {
+      container.innerHTML = `
+        <div class="state-msg">
+          <i class="fa-regular fa-face-frown" style="font-size:1.6rem;"></i>
+          រកមិនឃើញសិស្ស
+        </div>
+      `;
+      updateProgress();
+      return;
+    }
+
+    filteredStudents.forEach((student, index) => {
+      const row = document.createElement('div');
+      row.className = 'student-row';
+      row.dataset.status = student.status || '';
+      row.style.animationDelay = `${Math.min(index * 25, 300)}ms`;
+
+      row.innerHTML = `
+        <div class="avatar">${index + 1}</div>
+        <div class="student-name">${student.name}</div>
+        <div class="status-group">
+          <button type="button" class="status-btn present ${student.status === 'P' ? 'active' : ''}" data-value="P" aria-label="មកសាលា">
+             <span class="btn-text">P</span>
+          </button>
+          <button type="button" class="status-btn absent ${student.status === 'A' ? 'active' : ''}" data-value="A" aria-label="អវត្តមាន">
+            <span class="btn-text">A</span>
+          </button>
+        </div>
+      `;
+
+      row.querySelectorAll('.status-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const value = btn.dataset.value;
+          const newStatus = student.status === value ? '' : value;
+          student.status = newStatus;
+          row.dataset.status = newStatus;
+          row.querySelectorAll('.status-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.value === newStatus);
+          });
+          updateProgress();
+        });
+      });
+
+      container.appendChild(row);
+    });
+
+    updateProgress();
+  }
+
+  function showToast(message, type = 'warn') {
+    const layer = document.getElementById('toastLayer');
+    const icons = {
+      warn: 'fa-solid fa-triangle-exclamation',
+      error: 'fa-solid fa-circle-exclamation',
+      success: 'fa-solid fa-circle-check'
+    };
+
+    const existing = layer.querySelector('.toast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `<i class="${icons[type] || icons.warn}"></i><span>${message}</span>`;
+    layer.appendChild(toast);
+
+    requestAnimationFrame(() => toast.classList.add('show'));
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 220);
+    }, 2400);
+  }
+
+  function filterStudents() {
+    const keyword = document.getElementById('search').value.toLowerCase();
+    filteredStudents = students.filter(s => s.name.toLowerCase().includes(keyword));
+    renderStudents();
+  }
+
+  function resetForm() {
+    document.getElementById('search').value = '';
+    students.forEach(s => s.status = '');
+    filteredStudents = [...students];
+    renderStudents();
+  }
+
+  async function submitForm() {
+    const date = document.getElementById('dateInput').value;
+    const month = getMonthFromDate(date);
+    const day = new Date(date).getDate();
+
+    const data = filteredStudents.map(s => ({ name: s.name, status: s.status }));
+    const count = data.filter(d => d.status).length;
+
+    if (count === 0) {
+      showToast('មិនមានសិស្សអវត្តមានទេ!', 'warn');
+      return;
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.innerHTML = '<i class="fa-solid fa-hourglass"></i> កំពុងស្នើ...';
+    submitBtn.disabled = true;
+    document.getElementById('resetBtn').disabled = true;
+    document.getElementById('dateInput').disabled = true;
+    document.getElementById('search').disabled = true;
+    document.getElementById('appOverlay').classList.add('show');
+
+    try {
+      await fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify({ month, day, attendance: data }),
+      });
+
+      submitBtn.classList.add('success');
+      submitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> បានស្នើ';
+      resetForm();
+
+      setTimeout(() => {
+        submitBtn.classList.remove('success');
+        submitBtn.innerHTML = '<i class="fa-regular fa-paper-plane"></i> ដាក់ស្នើ';
+        submitBtn.disabled = false;
+      }, 1800);
+    } catch (e) {
+      showToast('បញ្ជូនមិនបាន', 'error');
+      submitBtn.innerHTML = '<i class="fa-regular fa-paper-plane"></i> ដាក់ស្នើ';
+      submitBtn.disabled = false;
+    } finally {
+      document.getElementById('resetBtn').disabled = false;
+      document.getElementById('dateInput').disabled = false;
+      document.getElementById('search').disabled = false;
+      document.getElementById('appOverlay').classList.remove('show');
+    }
+  }
+
+  window.onload = () => {
+    initDropdowns();
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    document.getElementById('dateInput').value = todayStr;
+    loadStudents(todayStr);
+  };
+
+  document.getElementById('dateInput').addEventListener('change', (e) => {
+    loadStudents(e.target.value);
+  });
+</script>
+</body>
+</html>
