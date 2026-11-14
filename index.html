@@ -560,7 +560,7 @@
   </div>
 
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxz89mWaXPBC_5OQvUPAIdmI-V0kaqFqXK2lmCURS208XFuuGZ3iRZeqZGd4wgraYT5jQ/exec';
   let students = [];
   let filteredStudents = [];
 
@@ -613,17 +613,37 @@
     document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('open'));
   });
 
-  function handleExport(type, monthObj) {
-    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('open'));
-    const label = type === 'pdf' ? 'PDF' : 'Excel';
-    showToast(`កំពុងរៀបចំទាញយក ${label} ខែ${monthObj.km}...`, 'success');
+ async function handleExport(type, monthObj) {
+  document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('open'));
+  const label = type === 'pdf' ? 'PDF' : 'Excel';
+  showToast(`កំពុងរៀបចំទាញយក ${label} ខែ${monthObj.km}...`, 'success');
 
-    // ប្រើ monthObj.km ដើម្បីទាញពី Sheet ឈ្មោះខែខ្មែរ (ឧទាហរណ៍: មករា, កុម្ភៈ...)
-    const khmerSheetName = encodeURIComponent(monthObj.km);
-    const exportURL = `${scriptURL}?action=export&format=${type}&month=${khmerSheetName}`;
-    
-    window.open(exportURL, '_blank');
+  try {
+    const url = `${scriptURL}?action=export&format=${type}&month=${encodeURIComponent(monthObj.km)}`;
+    const r = await (await fetch(url)).json();
+    if (r.error) throw new Error(r.error);
+
+    const bin = atob(r.data);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+
+    const ext = type === 'pdf' ? 'pdf' : 'xlsx';
+    const filename = `Attendance_${monthObj.en}.${ext}`;
+    const blob = new Blob([bytes], { type: r.mime });
+
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 15000);
+
+    showToast(`បានទាញយក ${label} ជោគជ័យ`, 'success');
+  } catch (err) {
+    showToast('ទាញយកមិនបាន: ' + err.message, 'error');
   }
+}
   function getMonthFromDate(dateStr) {
     const date = new Date(dateStr);
     return date.toLocaleString('en-US', { month: 'long' });
