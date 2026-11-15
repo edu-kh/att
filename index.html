@@ -54,6 +54,7 @@
     position:relative;
   }
 
+  /* ---------- Header ---------- */
   .header{
     position:relative;
     padding:18px 18px 14px;
@@ -165,6 +166,7 @@
   #search:focus{ box-shadow:0 0 0 3px rgba(199,154,59,0.55); }
   #search::placeholder{ color:#7c8ba0; }
 
+  /* ---------- Export Dropdowns ---------- */
   .dropdown{
     position:relative;
     flex-shrink:0;
@@ -231,7 +233,6 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
-    text-decoration:none;
     transition:background .14s ease, color .14s ease;
   }
   .dropdown-item:hover{
@@ -243,6 +244,7 @@
     color:var(--muted);
   }
 
+  /* progress */
   .progress-wrap{
     margin-top:12px;
     display:flex;
@@ -270,6 +272,7 @@
     white-space:nowrap;
   }
 
+  /* ---------- Content ---------- */
   .content{
     flex:1;
     overflow-y:auto;
@@ -366,9 +369,9 @@
     color:#fff;
     animation:pop .28s ease;
   }
-  .btn-text{ font-size:0.85rem;
-    font-weight:700;
-    color:#363535fc;
+  .btn-text{ font-size:0.85rem; 
+    font-weight:700; 
+    color:#363535fc; 
     font-family: times-new-roman;
 }
   @keyframes pop{
@@ -380,6 +383,7 @@
   .student-row[data-status="P"]{ background:var(--present-soft); }
   .student-row[data-status="A"]{ background:var(--absent-soft); }
 
+  /* ---------- Footer ---------- */
   .footer{
     flex-shrink:0;
     display:flex;
@@ -428,11 +432,13 @@
 
   .btn-submit i.fa-hourglass{ animation:spin 1s linear infinite; }
 
+  /* scrollbar */
   .content::-webkit-scrollbar{ width:6px; }
   .content::-webkit-scrollbar-thumb{ background:#c9d5e2; border-radius:99px; }
 
   :focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
 
+  /* ---------- Toast ---------- */
   .toast-layer{
     position:absolute;
     inset:0;
@@ -472,6 +478,7 @@
   .toast.error i{ color:#ff8a83; }
   .toast.success i{ color:#7fe0a8; }
 
+  /* ---------- Sending overlay ---------- */
   .app-overlay{
     position:absolute;
     inset:0;
@@ -519,72 +526,14 @@
           <button type="button" class="export-btn pdf" onclick="toggleDropdown('pdfMenu', event)" aria-label="នាំចេញ PDF">
             <i class="fa-solid fa-file-pdf icon-type"></i> PDF <i class="fa-solid fa-caret-down"></i>
           </button>
-          <div class="dropdown-menu" id="pdfMenu">
-            
-            <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/10gfZHLAgHXn9WrknKxxM2-thRx7nJx6LHZkauPjzAe4/export?format=pdf&portrait=true&size=A4&fitw=true&gridlines=false&gid=1115595213&download=true" target="_blank" rel="noopener">
-              <span>ខែវិច្ឆិកា</span><span class="en-month">November</span>
-            </a>
-            <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/10gfZHLAgHXn9WrknKxxM2-thRx7nJx6LHZkauPjzAe4/export?format=pdf&size=A4&portrait=true&top_margin=0.0&bottom_margin=0.0&left_margin=0.1&right_margin=0.0&horizontal_alignment=CENTER&vertical_alignment=MIDDLE&gridlines=false&printtitle=false&sheetnames=false&fzr=false&gid=1115595213&confirm=no_antivirus" target="_blank" rel="noopener">
-              <span>ខែធ្នូ</span><span class="en-month">December</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=pdf&month=%E1%9E%98%E1%9E%80%E1%9E%9A%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែមករា</span><span class="en-month">January</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=pdf&month=%E1%9E%80%E1%9E%BB%E1%9E%98%E1%9F%92%E1%9E%97%E1%9F%88" target="_blank" rel="noopener">
-              <span>ខែកុម្ភៈ</span><span class="en-month">February</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=pdf&month=%E1%9E%98%E1%9E%B8%E1%9E%93%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែមីនា</span><span class="en-month">March</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=pdf&month=%E1%9E%98%E1%9F%81%E1%9E%9F%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែមេសា</span><span class="en-month">April</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=pdf&month=%E1%9E%A7%E1%9E%9F%E1%9E%97%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែឧសភា</span><span class="en-month">May</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=pdf&month=%E1%9E%98%E1%9E%B7%E1%9E%90%E1%9E%BB%E1%9E%93%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែមិថុនា</span><span class="en-month">June</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=pdf&month=%E1%9E%80%E1%9E%80%E1%9F%92%E1%9E%80%E1%9E%8A%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែកក្កដា</span><span class="en-month">July</span>
-            </a>
-          </div>
+          <div class="dropdown-menu" id="pdfMenu"></div>
         </div>
 
         <div class="dropdown">
           <button type="button" class="export-btn excel" onclick="toggleDropdown('excelMenu', event)" aria-label="នាំចេញ Excel">
             <i class="fa-solid fa-file-excel icon-type"></i> Excel <i class="fa-solid fa-caret-down"></i>
           </button>
-          <div class="dropdown-menu" id="excelMenu">
-            
-            <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/10gfZHLAgHXn9WrknKxxM2-thRx7nJx6LHZkauPjzAe4/export?format=xlsx&gid=1115595213&confirm=no_antivirus" target="_blank" rel="noopener">
-              <span>ខែវិច្ឆិកា</span><span class="en-month">November</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=excel&month=%E1%9E%92%E1%9F%92%E1%9E%93%E1%9E%BC" target="_blank" rel="noopener">
-              <span>ខែធ្នូ</span><span class="en-month">December</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=excel&month=%E1%9E%98%E1%9E%80%E1%9E%9A%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែមករា</span><span class="en-month">January</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=excel&month=%E1%9E%80%E1%9E%BB%E1%9E%98%E1%9F%92%E1%9E%97%E1%9F%88" target="_blank" rel="noopener">
-              <span>ខែកុម្ភៈ</span><span class="en-month">February</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=excel&month=%E1%9E%98%E1%9E%B8%E1%9E%93%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែមីនា</span><span class="en-month">March</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=excel&month=%E1%9E%98%E1%9F%81%E1%9E%9F%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែមេសា</span><span class="en-month">April</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=excel&month=%E1%9E%A7%E1%9E%9F%E1%9E%97%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែឧសភា</span><span class="en-month">May</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=excel&month=%E1%9E%98%E1%9E%B7%E1%9E%90%E1%9E%BB%E1%9E%93%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែមិថុនា</span><span class="en-month">June</span>
-            </a>
-            <a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec?action=export&format=excel&month=%E1%9E%80%E1%9E%80%E1%9F%92%E1%9E%80%E1%9E%8A%E1%9E%B6" target="_blank" rel="noopener">
-              <span>ខែកក្កដា</span><span class="en-month">July</span>
-            </a>
-          </div>
+          <div class="dropdown-menu" id="excelMenu"></div>
         </div>
       </div>
 
@@ -606,13 +555,48 @@
     </div>
 
     <div class="toast-layer" id="toastLayer"></div>
+
     <div class="app-overlay" id="appOverlay"></div>
   </div>
 
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbyEDy4W0lQpBTfxhu_2aIvaBsoym8Hk_5Cc-kHjsqGRjJ3yJ4R60p42aNT08sHR5vodOw/exec';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwAoR9tKh6mejQsL0_jOw7KjlrPhu1BTH8VzQJO9sw0j7Yo6WECZ7mhZCikOu8rOBsNQA/exec';
   let students = [];
   let filteredStudents = [];
+
+  const SCHOOL_MONTHS = [
+    { en: 'October', km: 'តុលា' },
+    { en: 'November', km: 'វិច្ឆិកា' },
+    { en: 'December', km: 'ធ្នូ' },
+    { en: 'January', km: 'មករា' },
+    { en: 'February', km: 'កុម្ភៈ' },
+    { en: 'March', km: 'មីនា' },
+    { en: 'April', km: 'មេសា' },
+    { en: 'May', km: 'ឧសភា' },
+    { en: 'June', km: 'មិថុនា' },
+    { en: 'July', km: 'កក្កដា' }
+  ];
+
+  function initDropdowns() {
+    const pdfMenu = document.getElementById('pdfMenu');
+    const excelMenu = document.getElementById('excelMenu');
+
+    SCHOOL_MONTHS.forEach(m => {
+      const pdfItem = document.createElement('button');
+      pdfItem.type = 'button';
+      pdfItem.className = 'dropdown-item';
+      pdfItem.innerHTML = `<span>ខែ${m.km}</span><span class="en-month">${m.en}</span>`;
+      pdfItem.onclick = () => handleExport('pdf', m);
+      pdfMenu.appendChild(pdfItem);
+
+      const excelItem = document.createElement('button');
+      excelItem.type = 'button';
+      excelItem.className = 'dropdown-item';
+      excelItem.innerHTML = `<span>ខែ${m.km}</span><span class="en-month">${m.en}</span>`;
+      excelItem.onclick = () => handleExport('excel', m);
+      excelMenu.appendChild(excelItem);
+    });
+  }
 
   function toggleDropdown(menuId, event) {
     event.stopPropagation();
@@ -629,9 +613,111 @@
     document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('open'));
   });
 
+  /* ---------- Date helpers (timezone-safe) ---------- */
+  const MONTH_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const pad2 = n => String(n).padStart(2, '0');
+
+  function localToday() {
+    const d = new Date();
+    return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+  }
   function getMonthFromDate(dateStr) {
-    const date = new Date(dateStr);
-    return date.toLocaleString('en-US', { month: 'long' });
+    return MONTH_EN[parseInt(String(dateStr).split('-')[1], 10) - 1] || '';
+  }
+  function getDayFromDate(dateStr) {
+    return parseInt(String(dateStr).split('-')[2], 10);
+  }
+
+  /* ---------- Download helpers (all browsers) ---------- */
+  function base64ToBlob(b64, mime) {
+    const binary = atob(String(b64).replace(/\s/g, ''));
+    const len = binary.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) bytes[i] = binary.charCodeAt(i);
+    return new Blob([bytes], { type: mime || 'application/octet-stream' });
+  }
+
+  function saveBlob(blob, filename) {
+    // Old Edge / IE
+    if (navigator.msSaveOrOpenBlob) {
+      navigator.msSaveOrOpenBlob(blob, filename);
+      return;
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.rel = 'noopener';
+    a.href = url;
+
+    if (typeof a.download === 'undefined') {
+      // very old iOS/WebViews: no download attribute -> open the file instead
+      window.location.href = url;
+    } else {
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    // keep the URL alive long enough for slow phones / big files
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  }
+
+  function isInAppBrowser() {
+    return /FBAN|FBAV|FB_IAB|Instagram|Line\/|Zalo|MicroMessenger|; wv\)/i.test(navigator.userAgent);
+  }
+
+  let exporting = false;
+
+  async function handleExport(type, monthObj) {
+    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('open'));
+    if (exporting) { showToast('កំពុងដំណើរការ សូមរង់ចាំ...', 'warn'); return; }
+    exporting = true;
+
+    const label = type === 'pdf' ? 'PDF' : 'Excel';
+    showToast('កំពុងរៀបចំទាញយក ' + label + ' ខែ' + monthObj.km + '...', 'success');
+
+    // Khmer sheet name in `month`, English as a fallback in `monthEn`
+    const exportURL = scriptURL +
+      '?action=export&format=' + encodeURIComponent(type) +
+      '&month=' + encodeURIComponent(monthObj.km) +
+      '&monthEn=' + encodeURIComponent(monthObj.en) +
+      '&_=' + Date.now();
+
+    const ctrl = ('AbortController' in window) ? new AbortController() : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), 120000) : null;
+
+    try {
+      const res = await fetch(exportURL, { redirect: 'follow', cache: 'no-store', signal: ctrl ? ctrl.signal : undefined });
+      const text = await res.text();
+
+      let file;
+      try { file = JSON.parse(text); }
+      catch (_) {
+        // Google returned an HTML page (not deployed / not authorised)
+        showToast('Script មិនទាន់ Deploy ថ្មី ឬមិនទាន់អនុញ្ញាត', 'error');
+        return;
+      }
+
+      if (!file || !file.data) {
+        showToast((file && file.error) || 'ទាញយកមិនបាន', 'error');
+        return;
+      }
+
+      const blob = base64ToBlob(file.data, file.mimeType);
+      saveBlob(blob, file.filename || ('សម្រង់អវត្តមាន_ខែ' + monthObj.km + (type === 'pdf' ? '.pdf' : '.xlsx')));
+
+      showToast(
+        isInAppBrowser()
+          ? 'បើមិនទាញយក សូមបើកក្នុង Chrome ឬ Safari'
+          : 'បានទាញយក ' + label + ' ខែ' + monthObj.km,
+        isInAppBrowser() ? 'warn' : 'success'
+      );
+    } catch (err) {
+      showToast(err && err.name === 'AbortError' ? 'ចំណាយពេលយូរពេក សូមព្យាយាមម្តងទៀត' : 'ទាញយកមិនបាន', 'error');
+    } finally {
+      if (timer) clearTimeout(timer);
+      exporting = false;
+    }
   }
 
   function initials(name) {
@@ -766,7 +852,7 @@
   async function submitForm() {
     const date = document.getElementById('dateInput').value;
     const month = getMonthFromDate(date);
-    const day = new Date(date).getDate();
+    const day = getDayFromDate(date);
 
     const data = filteredStudents.map(s => ({ name: s.name, status: s.status }));
     const count = data.filter(d => d.status).length;
@@ -812,8 +898,9 @@
   }
 
   window.onload = () => {
+    initDropdowns();
     const today = new Date();
-    const todayStr = today.toISOString().split('T')[0];
+    const todayStr = localToday();
     document.getElementById('dateInput').value = todayStr;
     loadStudents(todayStr);
   };
