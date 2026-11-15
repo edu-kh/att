@@ -511,12 +511,10 @@
           <i class="fa-regular fa-calendar leading"></i>
           <input type="date" id="dateInput" />
         </div>
-          <div class="dropdown">
-          <button type="button" class="export-btn pdf" onclick="toggleDropdown('pdfMenu', event)" aria-label="នាំចេញ PDF">
-            <i class="fa-solid fa-file-pdf icon-type"></i>ទាញយក PDF <i class="fa-solid fa-caret-down"></i>
-          </button>
-          <div class="dropdown-menu" id="pdfMenu"></div>
-        </div>
+       <!--<a class="score-link" href="#">
+          <i class="fa-solid fa-chart-simple"></i> សម្រង់ពិន្ទុ
+        </a>
+          --> 
 
         <div class="dropdown">
           <button type="button" class="export-btn excel" onclick="toggleDropdown('excelMenu', event)" aria-label="នាំចេញ Excel">
@@ -531,9 +529,12 @@
           <i class="fa-solid fa-magnifying-glass leading"></i>
           <input type="text" id="search" placeholder="ស្វែងរកឈ្មោះសិស្ស..." oninput="filterStudents()" />
         </div>
-        <a class="score-link" href="#">
-          <i class="fa-solid fa-chart-simple"></i> សម្រង់ពិន្ទុ
-        </a>
+        <div class="dropdown">
+          <button type="button" class="export-btn pdf" onclick="toggleDropdown('pdfMenu', event)" aria-label="នាំចេញ PDF">
+            <i class="fa-solid fa-file-pdf icon-type"></i>ទាញយក PDF <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <div class="dropdown-menu" id="pdfMenu"></div>
+        </div>
       
       </div>
 
