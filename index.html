@@ -502,7 +502,7 @@
 
     <div class="header">
       <div class="title-row">
-        <h1>សម្រង់អវត្តមានថ្នាក់ទី៧D</h1>
+        <h1>សម្រង់អវត្តមានថ្នាក់ទី៧ " "</h1>
         <span class="badge">👨‍💻</span>
       </div>
 
@@ -511,9 +511,19 @@
           <i class="fa-regular fa-calendar leading"></i>
           <input type="date" id="dateInput" />
         </div>
-        <a class="score-link" href="https://edu-kh.github.io/score/">
-          <i class="fa-solid fa-chart-simple"></i> សម្រង់ពិន្ទុ
-        </a>
+          <div class="dropdown">
+          <button type="button" class="export-btn pdf" onclick="toggleDropdown('pdfMenu', event)" aria-label="នាំចេញ PDF">
+            <i class="fa-solid fa-file-pdf icon-type"></i>ទាញយក PDF <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <div class="dropdown-menu" id="pdfMenu"></div>
+        </div>
+
+        <div class="dropdown">
+          <button type="button" class="export-btn excel" onclick="toggleDropdown('excelMenu', event)" aria-label="នាំចេញ Excel">
+            <i class="fa-solid fa-file-excel icon-type"></i>ទាញយក Excel <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <div class="dropdown-menu" id="excelMenu"></div>
+        </div>
       </div>
 
       <div class="row-inline" style="margin-top:8px;">
@@ -521,20 +531,10 @@
           <i class="fa-solid fa-magnifying-glass leading"></i>
           <input type="text" id="search" placeholder="ស្វែងរកឈ្មោះសិស្ស..." oninput="filterStudents()" />
         </div>
-
-        <div class="dropdown">
-          <button type="button" class="export-btn pdf" onclick="toggleDropdown('pdfMenu', event)" aria-label="នាំចេញ PDF">
-            <i class="fa-solid fa-file-pdf icon-type"></i> PDF <i class="fa-solid fa-caret-down"></i>
-          </button>
-          <div class="dropdown-menu" id="pdfMenu"></div>
-        </div>
-
-        <div class="dropdown">
-          <button type="button" class="export-btn excel" onclick="toggleDropdown('excelMenu', event)" aria-label="នាំចេញ Excel">
-            <i class="fa-solid fa-file-excel icon-type"></i> Excel <i class="fa-solid fa-caret-down"></i>
-          </button>
-          <div class="dropdown-menu" id="excelMenu"></div>
-        </div>
+        <a class="score-link" href="#">
+          <i class="fa-solid fa-chart-simple"></i> សម្រង់ពិន្ទុ
+        </a>
+      
       </div>
 
       <div class="progress-wrap">
@@ -560,12 +560,11 @@
   </div>
 
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwAoR9tKh6mejQsL0_jOw7KjlrPhu1BTH8VzQJO9sw0j7Yo6WECZ7mhZCikOu8rOBsNQA/exec';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyusvvYrCB26Iq7dwSX_DpP4FfqAlQTZiz9yQEweO1doDrlwxbl1ywU-woSHVmd0oWXZg/exec';
   let students = [];
   let filteredStudents = [];
 
   const SCHOOL_MONTHS = [
-    { en: 'October', km: 'តុលា' },
     { en: 'November', km: 'វិច្ឆិកា' },
     { en: 'December', km: 'ធ្នូ' },
     { en: 'January', km: 'មករា' },
@@ -574,7 +573,8 @@
     { en: 'April', km: 'មេសា' },
     { en: 'May', km: 'ឧសភា' },
     { en: 'June', km: 'មិថុនា' },
-    { en: 'July', km: 'កក្កដា' }
+    { en: 'July', km: 'កក្កដា' },
+    { en: 'August', km: 'សីហា' }
   ];
 
   function initDropdowns() {
