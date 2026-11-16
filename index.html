@@ -141,7 +141,7 @@
     gap:6px;
     padding:0 14px;
     border-radius:var(--radius-sm);
-    background:rgba(255,255,255,0.14);
+    background:rgba(159, 214, 250, 0.14);
     border:1px solid rgba(255,255,255,0.35);
     color:#fff;
     text-decoration:none;
@@ -151,6 +151,16 @@
   }
   .score-link:active{ transform:scale(0.96); }
   .score-link:hover{ background:rgba(255,255,255,0.24); }
+
+  .footer .score-link{
+    height:52px;
+    border-radius:99px;
+    padding:0 18px;
+    background:rgba(159, 214, 250, 0.39);
+    border:1.5px solid #dfe6ee;
+    color:var(--ink);
+  }
+  .footer .score-link:hover{ background:#bad0edcc; }
 
   #search{
     width:100%;
@@ -553,6 +563,9 @@
       <button id="submitBtn" class="btn btn-submit" onclick="submitForm()">
         <i class="fa-regular fa-paper-plane"></i> ដាក់ស្នើ
       </button>
+      <a class="score-link" href="score.html">
+        <i class="fa-solid fa-chart-simple"></i> សម្រង់ពិន្ទុ
+      </a>
     </div>
 
     <div class="toast-layer" id="toastLayer"></div>
@@ -561,7 +574,7 @@
   </div>
 
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbyusvvYrCB26Iq7dwSX_DpP4FfqAlQTZiz9yQEweO1doDrlwxbl1ywU-woSHVmd0oWXZg/exec';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyKhqfFkYP3vN3DKYCHO6cPotvZ9AlixTnqrHMtjHS1iZaPuqgUBrm37Ns9y5DA-AK6nQ/exec';
   let students = [];
   let filteredStudents = [];
 
